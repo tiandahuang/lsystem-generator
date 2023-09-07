@@ -19,12 +19,12 @@ class PaperPress():
     DEFAULT_SAVE_DIR =      r'images'
     WALLPAPER_STAGING_DIR = r'staging'
     DEMO_TYPES = {
-            'sierpinski':       {'class':Sierpinski,        'default_name':os.path.join(DEFAULT_SAVE_DIR, 'sierpinski.svg')},
-            'dragon':           {'class':Dragon,            'default_name':os.path.join(DEFAULT_SAVE_DIR, 'dragon.svg')},
-            'plant':            {'class':Plant,             'default_name':os.path.join(DEFAULT_SAVE_DIR, 'plant.svg')},
-            'sierpinski_approx':{'class':SierpinskiApprox,  'default_name':os.path.join(DEFAULT_SAVE_DIR, 'sierpinski_approx.svg')},
-            'hilbert':          {'class':Hilbert,           'default_name':os.path.join(DEFAULT_SAVE_DIR, 'hilbert.svg')},
-            'levy':             {'class':Levy,              'default_name':os.path.join(DEFAULT_SAVE_DIR, 'levy.svg')}}
+            'sierpinski':       {'class':Sierpinski,        'default_name':'sierpinski.svg'},
+            'dragon':           {'class':Dragon,            'default_name':'dragon.svg'},
+            'plant':            {'class':Plant,             'default_name':'plant.svg'},
+            'sierpinski_approx':{'class':SierpinskiApprox,  'default_name':'sierpinski_approx.svg'},
+            'hilbert':          {'class':Hilbert,           'default_name':'hilbert.svg'},
+            'levy':             {'class':Levy,              'default_name':'levy.svg'}}
 
 
     def __init__(self, type_select, fname=None, wallpaper=False) -> None:
@@ -56,15 +56,15 @@ class PaperPress():
 
         if ext == '.svg':
             subprocess.run([self.INKSCAPE_PATH,
-                            f'--export-filename={fname}',
+                            f'--export-filename={os.path.abspath(fname)}',
                             '--export-margin=10',
-                            f'{fname}'])
+                            f'{os.path.abspath(fname)}'])
             
             subprocess.run([self.INKSCAPE_PATH,
-                            f'--export-filename={root + ".png"}',
+                            f'--export-filename={os.path.abspath(root + ".png")}',
                             '--export-background=#181818',
                             '--export-height=1440',
-                            f'{fname}'])
+                            f'{os.path.abspath(fname)}'])
     
         with open(os.path.join(self.WALLPAPER_STAGING_DIR, 'wallpaper.log', 'a')) as f:
             f.write(f'{self.name}\n')

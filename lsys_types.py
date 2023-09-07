@@ -18,11 +18,11 @@ class Dragon():
         self.ls.graph(self.t, self.ls_str, self.turtle_cmd_lut, fname)
 
 class Plant():
-    def __init__(self, levels=10) -> None:
+    def __init__(self, levels=6) -> None:
         variables = 'XF'
         constants = '+-[]'
         start = 'X'
-        rules = {'X':'F_[[X]-X]-F[-FX]+X', 'F':'FF'}
+        rules = {'X':'F+[[X]-X]-F[-FX]+X', 'F':'FF'}
         self.t = SvgTurtle(1e4, 1e4)
         self.turtle_cmd_lut = GraphingTools.get_standard_turtle_commands(self.t, (25, 25))
 

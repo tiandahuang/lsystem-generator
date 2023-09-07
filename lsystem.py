@@ -3,6 +3,7 @@ from svg_turtle import SvgTurtle
 import subprocess
 import numpy as np
 import functools as ft
+import os
 
 class LSystem():
     """
@@ -41,7 +42,7 @@ class LSystem():
               turtle_cmd : str,
               turtle_cmd_lut : dict[str, Callable],
               fname : str) -> None:
-        
+
         for idx, c in enumerate(turtle_cmd):
             turtle_cmd_lut[c](idx)
         
@@ -53,8 +54,8 @@ class LSystem():
         if new_fname is None: new_fname = fname
         subprocess.run([LSystem.INKSCAPE_PATH,
                         '--export-area-drawing',
-                        f'--export-plain-svg={new_fname}',
-                        f'{fname}'])
+                        f'--export-filename={os.path.abspath(new_fname)}',
+                        f'{os.path.abspath(fname)}'])
         
 class GraphingTools():
 
